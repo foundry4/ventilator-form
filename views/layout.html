@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block head %}
+      <link rel="stylesheet" href="stylesheets/style.css"/>
+      <title>
+        {% block title %}{% endblock %}Nunjucks + Express</title>
+    {% endblock %}
+  </head>
+  <body>
+    <div id="content">
+      {% block content %}{% endblock %}
+    </div>
+    <div id="footer">
+      {% block footer %}
+        FOOTER
+      {% endblock %}
+    </div>
+  </body>
+</html>
