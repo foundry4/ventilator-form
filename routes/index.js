@@ -8,7 +8,7 @@ router.get('/', function (req, res, next) {
 
 router.post('/submit', function (req, res, next) {
 
-  try {
+  //try {
     var data = req.body;
     var contact_name = data['contact_name'] || "";
     var contact_phone = data['contact_phone'] || "";
@@ -52,7 +52,7 @@ router.post('/submit', function (req, res, next) {
     }
 
     console.log(query);
-    try {
+    //try {
 
       const client = new Client({
         connectionString: process.env.HEROKU_POSTGRESQL_RED_URL || process.env.DATABASE_URL,
@@ -70,18 +70,19 @@ router.post('/submit', function (req, res, next) {
       });
 
       res.render("confirm", {});
-    }
+/*
+     }
     catch (err) {
       throw new err('Failed to connect to database')
     }
+ */
 
-
-    res.render("confirm", {});
-  }
+    //res.render("confirm", {});
+/*   }
   catch{
     //console.log("catch");
     throw new err('Failed to connect to database')
-  }
+  } */
 
 
 });
