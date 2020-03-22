@@ -51,10 +51,6 @@ router.post('/submit', function (req, res, next) {
       text: sql,
       values: values
     }
-    console.log(query);
-    
-    query["text"] = "INSERT INTO responses( info ) values ( $1 )";
-    query["values"] = [json];
     
     console.log(query);
     //try {
