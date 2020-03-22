@@ -1,0 +1,156 @@
+<div class="govuk-form-group">
+  <fieldset class="govuk-fieldset" aria-describedby="is-clinical-hint">
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+      <h1 class="govuk-heading-l">
+        Supply chain experience
+      </h1>
+    </legend>
+
+    <span id="is-clinical-hint" class="govuk-hint">
+      2. Do you already produce regulated ventilators that are used in a UK clinical setting
+      <i>i.e. Medicines and Healthcare Products Regulatory Agency (MHRA), approved with a CE mark?</i>
+    </span>
+    <div class="govuk-radios govuk-radios--inline">
+      <div class="govuk-radios__item">
+        <input class="govuk-radios__input" id="is-clinical" name="is-clinical" type="radio" value="yes" required>
+        <label class="govuk-label govuk-radios__label" for="is-clinical">
+          Yes
+        </label>
+      </div>
+      <div class="govuk-radios__item">
+        <input class="govuk-radios__input" id="is-clinical-2" name="is-clinical" type="radio" value="no" required>
+        <label class="govuk-label govuk-radios__label" for="is-clinical-2">
+          No
+        </label>
+      </div>
+    </div>
+
+
+    <span id="" class="govuk-hint">
+      3. Have you made parts or systems for ventilators:
+    </span>
+    <span id="human-use-hint" class="govuk-hint">
+      for human use in clinical setting?
+    </span>
+    <div class="govuk-radios govuk-radios--inline">
+      <div class="govuk-radios__item">
+        <input class="govuk-radios__input" id="human-use" name="human-use" type="radio" value="yes" required>
+        <label class="govuk-label govuk-radios__label" for="human-use">
+          Yes
+        </label>
+      </div>
+      <div class="govuk-radios__item">
+        <input class="govuk-radios__input" id="human-use-2" name="human-use" type="radio" value="no" required>
+        <label class="govuk-label govuk-radios__label" for="human-use-2">
+          No
+        </label>
+      </div>
+    </div>
+    <span id="vet-use-hint" class="govuk-hint">
+      for use in veterinary setting?
+    </span>
+    <div class="govuk-radios govuk-radios--inline">
+      <div class="govuk-radios__item">
+        <input class="govuk-radios__input" id="vet-use" name="vet-use" type="radio" value="yes" required>
+        <label class="govuk-label govuk-radios__label" for="vet-use">
+          Yes
+        </label>
+      </div>
+      <div class="govuk-radios__item">
+        <input class="govuk-radios__input" id="vet-use-2" name="vet-use" type="radio" value="no" required>
+        <label class="govuk-label govuk-radios__label" for="vet-use-2">
+          No
+        </label>
+      </div>
+    </div>
+    <span id="other-use-hint" class="govuk-hint">
+      use in any other setting?
+    </span>
+    <div class="govuk-radios govuk-radios--inline">
+      <div class="govuk-radios__item">
+        <input class="govuk-radios__input" id="other-use" name="other-use" type="radio" value="yes" required>
+        <label class="govuk-label govuk-radios__label" for="other-use">
+          Yes
+        </label>
+      </div>
+      <div class="govuk-radios__item">
+        <input class="govuk-radios__input" id="other-use-2" name="other-use" type="radio" value="no" required>
+        <label class="govuk-label govuk-radios__label" for="other-use-2">
+          No
+        </label>
+      </div>
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="ventilator-detail">
+        If you answered yes to any of the above, please provide further details.
+      </label>
+      <span id="ventilator-detail-hint" class="govuk-hint">
+      </span>
+      <textarea class="govuk-textarea" id="ventilator-detail" name="ventilator-detail" rows="5"
+        aria-describedby="ventilator-detail-hint"></textarea>
+    </div>
+
+    <span id="devices-hint" class="govuk-hint">
+      4. Please indicate whether you design, manufacture or supply any of the following medical devices or component
+      parts and, if so, where. (optional)
+    </span>
+    <table class="govuk-table">
+      <caption class="govuk-table__caption"></caption>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">Category</th>
+          <th scope="col" class="govuk-table__header">Design</th>
+          <th scope="col" class="govuk-table__header">Manufacture</th>
+          <th scope="col" class="govuk-table__header">Supply</th>
+          <th scope="col" class="govuk-table__header">Location</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        {% for item in devices %}
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header">{{ item }}</th>
+
+          <td class="govuk-table__cell">
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="design-{{ loop.index }}" name="design" type="checkbox"
+                value="{{ item }}" aria-label="design-{{ loop.index }}">
+              <label class="govuk-label govuk-checkboxes__label" for="design-{{ loop.index }}">
+                &nbsp;
+              </label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="manufacture-{{ loop.index }}" name="manufacture"
+                type="checkbox" value="{{ item }}" aria-label="manufacture-{{ loop.index }}">
+              <label class="govuk-label govuk-checkboxes__label" for="manufacture-{{ loop.index }}">
+                &nbsp;
+              </label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="supply-{{ loop.index }}" name="supply" type="checkbox"
+                value="{{ item }}" aria-label="supply-{{ loop.index }}">
+              <label class="govuk-label govuk-checkboxes__label" for="supply-{{ loop.index }}">
+                &nbsp;
+              </label>
+            </div>
+          </td>
+          <td class="govuk-table__cell">
+            <select class="govuk-select" name="location-{{ loop.index }}" aria-label="location-{{ loop.index }}">
+              <option value="" selected></option>
+              <option value="1">in the UK</option>
+              <option value="2">in Europe</option>
+              <option value="3">in rest of world</option>
+            </select>
+          </td>
+
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </fieldset>
+</div>

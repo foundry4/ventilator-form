@@ -1,0 +1,80 @@
+<fieldset class="govuk-fieldset" aria-describedby="basic-hint basic-error">
+
+  <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+    <h1 class="govuk-heading-l">
+      Basic details and contact
+    </h1>
+  </legend>
+  <span id="basic-hint" class="govuk-hint">
+    1. Add the name and contact details for your company.
+  </span>
+
+
+  <div class="">
+    <label class="govuk-label" for="organisation-name">
+      Name of your organisation
+    </label>
+    <span id="address-name-error" class="govuk-error-message hide">
+      Enter the organisation name
+    </span>
+    <input class="govuk-input govuk-input--width-20" id="organisation-name" name="organisation-name" type="text"
+      value="" required>
+  </div>
+  <br />
+  <div class="">
+    <label class="govuk-label" for="company-number">
+      Company number (optional)
+    </label>
+    <span id="company-number-error" class="govuk-error-message hide">
+      Enter the company number, is available
+    </span>
+    <input class="govuk-input govuk-input--width-20" id="company-number" name="company-number" type="text"
+      value="">
+  </div>
+  <br />
+  <div class="">
+    <label class="govuk-label" for="primary-contact">
+      Primary contact full name
+    </label>
+    <span id="primary-contact-error" class="govuk-error-message hide">
+      Enter the name of the Primary Contact
+    </span>
+    <input data-required="true" class="govuk-input govuk-input--width-20" id="primary-contact" name="primary-contact"
+      type="text" value="" required>
+  </div>
+  <br />
+  <div class="">
+    <label class="govuk-label" for="primary-contact-role">
+      Primary contact role at organisation
+    </label>
+    <span id="primary-contact-role-error" class="govuk-error-message hide">
+      Enter the person's role
+    </span>
+    <input data-required="true" class="govuk-input govuk-input--width-20" id="primary-contact-role"
+      name="primary-contact-role" type="text" value="" required>
+  </div>
+  <br />
+  <div class="">
+    <label class="govuk-label" for="phone">
+      Primary contact telephone number
+    </label>
+    <span id="phone-error" class="govuk-error-message hide">
+      Enter the contact phone number
+    </span>
+    <input data-required="true" class="govuk-input govuk-input--width-20" id="phone" name="phone" type="text"
+      value="" required>
+  </div>
+  <br />
+  <div class="">
+    <label class="govuk-label" for="email">
+      Primary contact email address
+    </label>
+    <span id="email-error" class="govuk-error-message hide">
+      Enter the contact email
+    </span>
+    <input data-required="true" class="govuk-input govuk-input--width-20" id="email" name="email" type="text"
+      value="" pattern="^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$" required>
+  </div>
+</fieldset>
+
+<br />

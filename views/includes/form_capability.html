@@ -1,0 +1,119 @@
+<div class="govuk-form-group">
+  <fieldset class="govuk-fieldset" aria-describedby="capabilites-hint">
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+      <h1 class="govuk-heading-l">
+        Business capabilities
+      </h1>
+    </legend>
+
+    <span id="capabilites-hint" class="govuk-hint">
+    </span>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="offer">
+        5. Please indicate what your organisation can offer, including the relevant experience and background
+        information, to help inform the organisation's suitability for the initiative. (optional)
+      </label>
+      <span id="offer-hint" class="govuk-hint">
+      </span>
+      <textarea class="govuk-textarea" id="offer" name="offer" rows="5"
+        aria-describedby="offer-hint"></textarea>
+    </div>
+
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset" aria-describedby="expertise-hint">
+
+        <span id="expertise-hint" class="govuk-hint">
+          6. Please indicate in which of the following activities your organisation has relevant skills, which is your
+          specialism, and where these activities take place. (optional)
+        </span>
+        <table class="govuk-table">
+          <caption class="govuk-table__caption"></caption>
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header">Category</th>
+              <th scope="col" class="govuk-table__header">Relevant skills</th>
+              <th scope="col" class="govuk-table__header">Specialism</th>
+              <th scope="col" class="govuk-table__header">Location</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            {% for item in expertise %}
+            <tr class="govuk-table__row">
+              <th scope="row" class="govuk-table__header">{{ item.text }}</th>
+
+              <td class="govuk-table__cell">
+                <div class="govuk-checkboxes__item">
+                  <input class="govuk-checkboxes__input" id="skills-{{ loop.index }}" name="skills" type="checkbox"
+                    value="{{ item.name }}" aria-label="skills-{{ loop.index }}">
+                  <label class="govuk-label govuk-checkboxes__label" for="skills-{{ loop.index }}">
+                    &nbsp;
+                  </label>
+                </div>
+              </td>
+
+              <td class="govuk-table__cell">
+                <div class="govuk-checkboxes__item">
+                  <input class="govuk-checkboxes__input" id="specialism-{{ loop.index }}" name="specialism"
+                    type="checkbox" value="{{ item.name }}" aria-label="specialism-{{ loop.index }}">
+                  <label class="govuk-label govuk-checkboxes__label" for="specialism-{{ loop.index }}">
+                    &nbsp;
+                  </label>
+                </div>
+              </td>
+              <td class="govuk-table__cell">
+                <select class="govuk-select" name="specialism-location-{{ loop.index }}" aria-label="specialism-location-{{ loop.index }}">
+                  <option value="" selected></option>
+                  <option value="1">in the UK</option>
+                  <option value="2">in Europe</option>
+                  <option value="3">in rest of world</option>
+                </select>
+              </td>
+
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+      </fieldset>
+    </div>
+
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset" aria-describedby="resources-hint">
+ 
+        <span id="resources-hint" class="govuk-hint">
+          7. Please indicate which enabling resources are you able to provide in service of this initiative. (optional)
+        </span>
+        <div class="govuk-checkboxes">
+          {% for item in resources %}
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="resources-{{ loop.index }}" name="resources" type="checkbox"
+              value="{{ item }}" aria-label="resources-{{ loop.index }}">
+            <label class="govuk-label govuk-checkboxes__label" for="resources-{{ loop.index }}">
+              {{ item }}
+            </label>
+          </div>
+          {% endfor %}
+        </div>
+        <br />
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="resources-detail">
+            If yes to any of the above, please describe:
+          </label>
+          <span id="resources-detail-hint" class="govuk-hint">
+          </span>
+          <textarea class="govuk-textarea" id="resources-detail" name="resources-detail" rows="5"
+            aria-describedby="resources-detail-hint"></textarea>
+        </div>
+      </fieldset>
+    </div>
+
+
+
+
+
+
+
+
+  </fieldset>
+</div>
