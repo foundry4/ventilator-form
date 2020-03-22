@@ -1,16 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const { Client } = require('pg');
-const createData = require('../lib/createFormData');
-var {devices, expertise, resources} = require('../lib/constants');
+const createData = require('../lib/createData');
+
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render("index", {
-    devices: devices,
-    expertise: expertise,
-    resources: resources
-});
+  res.render("simpleForm", {});
 });
 
 
@@ -28,7 +24,6 @@ router.post('/submit', function (req, res, next) {
 
     try {
 
-      //res.render("confirm", {});
       const client = new Client({
         connectionString: process.env.HEROKU_POSTGRESQL_RED_URL || process.env.DATABASE_URL,
         ssl: true,
