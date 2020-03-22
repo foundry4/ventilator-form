@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { Client } = require('pg');
 const createData = require('../lib/createData');
-var { devices, expertise, resources } = require('../lib/constants');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
