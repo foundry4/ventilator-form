@@ -69,6 +69,7 @@ router.post('/submit', function (req, res, next) {
       
       console.log("query");
       client.query(query, (err, res) => {
+        console.log(err);
         console.log(res);
 
         client.end();
