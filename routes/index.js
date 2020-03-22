@@ -30,7 +30,7 @@ router.post('/submit', function (req, res, next) {
 
       client.connect();
 
-      client.query(query, (err, res) => {
+      client.query(query, (err, response) => {
 
         client.end();
         if (err) {
