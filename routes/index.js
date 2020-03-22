@@ -46,12 +46,16 @@ router.post('/submit', function (req, res, next) {
     var positions = valuePositions.join(", ");
 
     var sql = "INSERT INTO reponses(" + fields + ") VALUES (" + positions + ");"
-    console.log(sql);
+
     const query = {
       text: sql,
       values: values
     }
-
+    console.log(query);
+    
+    query["text"] = "INSERT INTO reponses( info ) values ( $1 )";
+    query["values"] = [json];
+    
     console.log(query);
     //try {
 
@@ -62,7 +66,8 @@ router.post('/submit', function (req, res, next) {
 
       console.log("connect");
       client.connect();
-
+      
+      console.log("query");
       client.query(query, (err, res) => {
         console.log(res);
 
