@@ -45,7 +45,7 @@ router.post('/submit', function (req, res, next) {
     var fields = fieldNames.join(", ");
     var positions = valuePositions.join(", ");
 
-    var sql = "INSERT INTO reponses(" + fields + ") VALUES (" + positions + ");"
+    var sql = "INSERT INTO responses(" + fields + ") VALUES (" + positions + ");"
 
     const query = {
       text: sql,
@@ -53,7 +53,7 @@ router.post('/submit', function (req, res, next) {
     }
     console.log(query);
     
-    query["text"] = "INSERT INTO reponses( info ) values ( $1 )";
+    query["text"] = "INSERT INTO responses( info ) values ( $1 )";
     query["values"] = [json];
     
     console.log(query);
