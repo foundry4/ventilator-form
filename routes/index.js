@@ -13,7 +13,6 @@ router.get('/', function (req, res, next) {
 router.post('/submit', function (req, res, next) {
   try {
     var data = req.body;
-
     const { fields, positions, json, values } = createData(data);
     var sql = "INSERT INTO companies(" + fields + ") VALUES (" + positions + ");"
     const query = {
@@ -30,11 +29,9 @@ router.post('/submit', function (req, res, next) {
         ssl: true,
       });
 
-      console.log("connect");
       client.connect();
 
       client.query(query, (err, res) => {
-        console.log(res);
 
         client.end();
         if (err) {
