@@ -9,19 +9,12 @@ router.get('/', function (req, res, next) {
 
 router.post('/submit', function (req, res, next) {
 
-  //try {
+  try {
     var data = req.body;
     var contact_name = data['contact_name'] || "";
     var contact_phone = data['contact_phone'] || "";
     var contact_email = data['contact_email'] || "";
     var json = JSON.stringify(data);
-
-    // loop through results
-    var keys = Object.keys(data);
-    var len = keys.length;
-    for (var i = 0; i < len; i++) {
-      console.log(keys[i], data[keys[i]]);
-    }
 
     var sql_values = {
       "info": json,
@@ -51,41 +44,35 @@ router.post('/submit', function (req, res, next) {
       text: sql,
       values: values
     }
-    
-    console.log(query);
-    //try {
 
+    console.log(query);
+
+    try {
       const client = new Client({
         connectionString: process.env.HEROKU_POSTGRESQL_RED_URL || process.env.DATABASE_URL,
         ssl: true,
       });
 
-      console.log("connect");
       client.connect();
-      
-      console.log("query");
-      client.query(query, (err, res) => {
-        console.log(err);
-        console.log(res);
 
+      client.query(query, (err, res) => {
         client.end();
         if (err) next(err);
       });
 
       res.render("confirm", {});
-/*
-     }
+
+    }
     catch (err) {
       throw new err('Failed to connect to database')
     }
- */
 
-    //res.render("confirm", {});
-/*   }
+
+  }
   catch{
     //console.log("catch");
     throw new err('Failed to connect to database')
-  } */
+  }
 
 
 });
