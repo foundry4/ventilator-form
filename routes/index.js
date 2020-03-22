@@ -1,6 +1,8 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const { Client } = require('pg');
+const createData = require('../lib/createData');
+var { devices, expertise, resources } = require('../lib/constants');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -11,35 +13,9 @@ router.get('/', function (req, res, next) {
 router.post('/submit', function (req, res, next) {
   try {
     var data = req.body;
-    var contact_name = data['contact_name'] || "";
-    var contact_phone = data['contact_phone'] || "";
-    var contact_email = data['contact_email'] || "";
-    var json = JSON.stringify(data);
 
-    var sql_values = {
-      "info": json,
-      "contact_name": contact_name,
-      "contact_phone": contact_phone,
-      "contact_email": contact_email
-    }
-
-    // Build arrays of entries for the SQL query
-    var fieldNames = [];
-    var valuePositions = [];
-    var values = [];
-    var sql_keys = Object.keys(sql_values)
-    for (var i = 0; i < sql_keys.length; i++) {
-      key = sql_keys[i]
-      fieldNames.push(key)
-      valuePositions.push("$" + (i + 1))
-      values.push(sql_values[key])
-    }
-
-    var fields = fieldNames.join(", ");
-    var positions = valuePositions.join(", ");
-
-    var sql = "INSERT INTO responses(" + fields + ") VALUES (" + positions + ");"
-
+    const { fields, positions, json, values } = createData(data);
+    var sql = "INSERT INTO companies(" + fields + ") VALUES (" + positions + ");"
     const query = {
       text: sql,
       values: values
@@ -48,19 +24,25 @@ router.post('/submit', function (req, res, next) {
     console.log(query);
 
     try {
+
       const client = new Client({
         connectionString: process.env.HEROKU_POSTGRESQL_RED_URL || process.env.DATABASE_URL,
         ssl: true,
       });
 
+      console.log("connect");
       client.connect();
 
       client.query(query, (err, res) => {
-        client.end();
-        if (err) next(err);
-      });
+        console.log(res);
 
-      res.render("confirm", {});
+        client.end();
+        if (err) {
+          next(err)
+        } else {
+          res.render("confirm", {});
+        }
+      });
 
     }
     catch (err) {
