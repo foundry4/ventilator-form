@@ -7,8 +7,8 @@ router.get('/', function (req, res, next) {
   res.render('index', {});
 });
 
-router.post('/submit', function (req, res, next) {
 
+router.post('/submit', function (req, res, next) {
   try {
     var data = req.body;
     var contact_name = data['contact_name'] || "";
@@ -67,10 +67,8 @@ router.post('/submit', function (req, res, next) {
       throw new err('Failed to connect to database')
     }
 
-
   }
   catch{
-    //console.log("catch");
     throw new err('Failed to connect to database')
   }
 
