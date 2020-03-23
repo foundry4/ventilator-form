@@ -7,6 +7,8 @@ const connectLivereload = require("connect-livereload");
 const livereload = require('livereload');
 const nunjucks = require('nunjucks');
 
+const env = (process.env.NODE_ENV || 'development').toLowerCase();
+
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
