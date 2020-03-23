@@ -3,9 +3,13 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var connectLivereload = require("connect-livereload");
+const connectLivereload = require("connect-livereload");
 const livereload = require('livereload');
 const nunjucks = require('nunjucks');
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
