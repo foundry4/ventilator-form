@@ -20,12 +20,19 @@ var app = express();
 app.use(connectLivereload());
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+let appViews = [
+  path.join(__dirname, 'node_modules/govuk-frontend/'),
+  path.join(__dirname, 'node_modules/govuk-frontend/components'),
+  path.join(__dirname, 'views')
+]
+let nunjucksConfig = {
+  autoescape: true,
+  noCache: true,
+  express: app
+}
 // set up nunjucjs
-nunjucks.configure('views', {
-  express: app,
-  autoescape: true
-});
+nunjucks.configure(appViews, nunjucksConfig)
+//app.set('views', appViews);
 app.set('view engine', 'html')
 
 app.use(logger('dev'));
