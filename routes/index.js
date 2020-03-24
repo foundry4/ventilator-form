@@ -57,7 +57,6 @@ router.post('/submit', function (req, res, next) {
     throw new err('Failed to connect to database')
   }
 
-
 });
 
 module.exports = router;
