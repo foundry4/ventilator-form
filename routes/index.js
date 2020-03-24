@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const { Client } = require('pg');
-const createData = require('../lib/createData');
+const createData = require('../lib/createFormData');
+var {devices, expertise, resources} = require('../lib/constants');
 
 
 // GET home page
 router.get('/', function (req, res, next) {
-  res.render("simpleForm", {});
-});
-
-// test macros
-router.get('/test', function (req, res, next) {
-  res.render("macroTest", {});
+  res.render('index', {
+      devices: devices,
+      expertise: expertise,
+      resources: resources
+  });
 });
 
 
@@ -19,13 +19,14 @@ router.post('/submit', function (req, res, next) {
   try {
     var data = req.body;
     const { fields, positions, json, values } = createData(data);
-    var sql = "INSERT INTO responses(" + fields + ") VALUES (" + positions + ");"
+    var sql = 'INSERT INTO responses(' + fields + ') VALUES (' + positions + ');'
     const query = {
       text: sql,
       values: values
     }
+    console.log(query);
     console.log(req.app.get('env') );
-    console.log("ssl?" + (process.env.NODE_ENV === 'production'));
+    console.log('ssl?' + (process.env.NODE_ENV === 'production'));
 
     try {
 
@@ -43,7 +44,7 @@ router.post('/submit', function (req, res, next) {
         if (err) {
           next(err)
         } else {
-          res.render("confirm", {});
+          res.render('confirm', {});
         }
       });
  
