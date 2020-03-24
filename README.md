@@ -19,11 +19,13 @@ This route begins by checking for any validation errors
 
 ## routes/index.js
 
-This is the file handling the main routes
+This is the file handling the main routes.
+
+The validation of entries takes place here (approximately lines 16 - 70).
 
 ## lib/save_to_db.js
 
-This is the file processing the JSON data from the form. It calls teh createMacroData function to process the JSON response into valid entries that we can use to build the sql query.
+This is the file processing the JSON data from the form. It calls the createMacroData function to process the JSON response into valid entries that we can use to build the sql query.
 
 It then generates the sql query and then sends the query to the database. 
 
