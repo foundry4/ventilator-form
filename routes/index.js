@@ -19,7 +19,7 @@ router.post('/submit', function (req, res, next) {
   try {
     var data = req.body;
     const { fields, positions, json, values } = createData(data);
-    var sql = 'INSERT INTO responses(' + fields + ') VALUES (' + positions + ');'
+    var sql = 'INSERT INTO companies(' + fields + ') VALUES (' + positions + ');'
     const query = {
       text: sql,
       values: values
