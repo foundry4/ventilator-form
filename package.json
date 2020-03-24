@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon --ext js,html --ignore public --verbose ./bin/www"
+    "dev": "nodemon --ext js,html --ignore public --verbose ./bin/www",
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "connect-livereload": "^0.6.1",
@@ -11,6 +12,7 @@
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "express": "~4.16.1",
+    "express-validator": "^6.4.0",
     "govuk-frontend": "^3.6.0",
     "http-errors": "~1.6.3",
     "livereload": "^0.9.1",
