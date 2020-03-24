@@ -13,6 +13,9 @@ router.get('/', function (req, res, next) {
       resources: resources
   });
 });
+router.get('/privacy', function (req, res, next) {
+  res.render('privacy', {});
+});
 
 
 router.post('/submit', function (req, res, next) {
@@ -32,7 +35,7 @@ router.post('/submit', function (req, res, next) {
 
       const client = new Client({
         connectionString: process.env.HEROKU_POSTGRESQL_RED_URL || process.env.DATABASE_URL,
-        ssl: (process.env.NODE_ENV === 'production'),
+        ssl: true,
       });
       
 
