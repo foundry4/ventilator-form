@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon --ext js,html --ignore public --verbose ./bin/www",
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "dev": "nodemon --ext js,html --ignore public --verbose ./bin/www"
   },
   "dependencies": {
     "connect-livereload": "^0.6.1",
