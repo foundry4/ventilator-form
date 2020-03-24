@@ -3,7 +3,7 @@ const router = express.Router();
 const { Client } = require('pg');
 const createData = require('../lib/createData');
 const createMacroData = require('../lib/createMacroData');
-const { body, validationResult } = require('express-validator/check')
+const { body, validationResult } = require('express-validator')
 const { formatValidationErrors } = require('../lib/utils');
 const save_to_db = require('../lib/save_to_db');
 
