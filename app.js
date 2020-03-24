@@ -22,7 +22,6 @@ app.use(connectLivereload());
 // view engine setup
 let appViews = [
   path.join(__dirname, 'node_modules/govuk-frontend/'),
-  path.join(__dirname, 'node_modules/govuk-frontend/components'),
   path.join(__dirname, 'views')
 ]
 let nunjucksConfig = {
@@ -31,8 +30,7 @@ let nunjucksConfig = {
   express: app
 }
 // set up nunjucjs
-nunjucks.configure(appViews, nunjucksConfig)
-//app.set('views', appViews);
+nunjucks.configure(appViews, nunjucksConfig) 
 app.set('view engine', 'html')
 
 app.use(logger('dev'));

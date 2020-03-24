@@ -4,9 +4,14 @@ const { Client } = require('pg');
 const createData = require('../lib/createData');
 
 
-/* GET home page. */
+// GET home page
 router.get('/', function (req, res, next) {
   res.render("simpleForm", {});
+});
+
+// test macros
+router.get('/test', function (req, res, next) {
+  res.render("macroTest", {});
 });
 
 
