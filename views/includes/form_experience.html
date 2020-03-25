@@ -25,25 +25,26 @@
   name: "is-clinical",
   fieldset: {
     legend: {
-      text: " 2. Do you already produce regulated ventilators that are used in a UK clinical setting
+      text: "2. Do you already produce regulated ventilators that are used in a UK clinical setting
       i.e. Medicines and Healthcare Products Regulatory Agency (MHRA), approved with a CE mark?",
       isPageHeading: false,
       classes: "govuk-body-l"
     }
   },
-  errorMessage: {
-    text: errors["is-clinical"].text
-  },
   items: [
     {
       value: "yes",
-      text: "Yes"
+      text: "Yes",
+      checked: values["is-clinical"] == "yes"
     },
     {
       value: "no",
-      text: "No"
+      text: "No",
+      checked: values["is-clinical"] == "no"
     }
-  ]
+  ],
+  errorMessage: errors["is-clinical"]
+
 }) }}
 <p class="govuk-body">3. Have you made parts or systems for ventilators:</p>
 {{ govukRadios({
@@ -57,19 +58,19 @@
       classes: "govuk-hint"
     }
   },
-  errorMessage: {
-    text: errors["human-use"].text
-  },
   items: [
-    {
-      value: "yes",
-      text: "Yes"
-    },
-    {
-      value: "no",
-      text: "No"
-    }
-  ]
+  {
+    value: "yes",
+    text: "Yes",
+    checked: values["human-use"] == "yes"
+  },
+  {
+    value: "no",
+    text: "No",
+    checked: values["human-use"] == "no"
+  }
+  ],
+  errorMessage: errors["human-use"]
 }) }}
 
 {{ govukRadios({
@@ -83,19 +84,19 @@
       classes: "govuk-hint"
     }
   },
-  errorMessage: {
-    text: errors["vet-use"].text
-  },
   items: [
-    {
-      value: "yes",
-      text: "Yes"
-    },
-    {
-      value: "no",
-      text: "No"
-    }
-  ]
+  {
+    value: "yes",
+    text: "Yes",
+    checked: values["vet-use"] == "yes"
+  },
+  {
+    value: "no",
+    text: "No",
+    checked: values["vet-use"] == "no"
+  }
+  ],
+  errorMessage: errors["vet-use"]
 }) }}
 {{ govukRadios({
   classes: "govuk-radios--inline",
@@ -108,19 +109,20 @@
       classes: "govuk-hint"
     }
   },
-  errorMessage: {
-    text: errors["other-use"].text
-  },
+ 
   items: [
-    {
-      value: "yes",
-      text: "Yes"
-    },
-    {
-      value: "no",
-      text: "No"
-    }
-  ]
+  {
+    value: "yes",
+    text: "Yes",
+    checked: values["other-use"] == "yes"
+  },
+  {
+    value: "no",
+    text: "No",
+    checked: values["other-use"] == "no"
+  }
+  ],
+  errorMessage: errors["other-use"]
 }) }}
 {% endcall %}
 
