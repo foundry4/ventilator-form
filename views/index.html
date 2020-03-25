@@ -1,18 +1,24 @@
 {% extends "layout.html" %}
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+
+
 {% block header %}
-{{ govukHeader({
-  homepageUrl: "/error"
-}) }}
 {% endblock %}
 
-
+{% set pageTitle = "Readiness to supply ventilators and ventilator components" %}
+{% block pageTitle %}{{ "Error: " if errors }}{{ pageTitle }} - GOV.UK{% endblock %}
 
 
 {% block content %}
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-
+    {% if errorSummary.length > 0 %}
+    {{ govukErrorSummary({
+    titleText: "There is a problem",
+    errorList: errorSummary
+    }) }}
+    {% endif %}
     <h1 class="govuk-heading-xl">
       Readiness to supply ventilators and ventilator components
     </h1>
@@ -33,28 +39,12 @@
       <li>Business capabilities</li>
 
     </ul>
-    <!-- <p>
-    Screen reader support enabled.
-  </p> -->
+
   </div>
   <div class="govuk-grid-column-full">
-    <form id="" action="submit" method="post" class="form">
-
-
-      <div class="govuk-error-summary hide" aria-labelledby="error-summary-title" role="alert" tabindex="-1"
-        data-module="error-summary">
-        <h2 class="govuk-error-summary__title " id="error-summary-title">
-          There is a problem
-        </h2>
-        <div class="govuk-error-summary__body">
-          <ul class="govuk-list govuk-error-summary__list">
-          </ul>
-        </div>
-      </div>
-
+    <form id="" action="/submit" method="post" class="form">
 
       <div class="govuk-form-group">
-
 
         {% include "includes/form_basic.html" %}
 

@@ -6,6 +6,7 @@ const createMacroData = require('../lib/createMacroData');
 const { body, validationResult } = require('express-validator')
 const { formatValidationErrors } = require('../lib/utils');
 const save_to_db = require('../lib/save_to_db');
+const save_to_companies_db = require('../lib/save_to_companies_db');
 const createData = require('../lib/createFormData');
 var {devices, expertise, resources} = require('../lib/constants');
 
@@ -98,46 +99,53 @@ router.get('/privacy', function (req, res, next) {
 });
 
 
-router.post('/submit', function (req, res, next) {
-  try {
-    var data = req.body;
-    const { fields, positions, json, values } = createData(data);
-
-    var sql = 'INSERT INTO companies(' + fields + ') VALUES (' + positions + ');'
-    const query = {
-      text: sql,
-      values: values
-    }
-    console.log(query);
-
-    try {
-      const client = new Client({
-        connectionString: process.env.HEROKU_POSTGRESQL_RED_URL || process.env.DATABASE_URL,
-        ssl: process.env.NODE_ENV === 'production'
-      });
-      
-      client.connect();
-
-      client.query(query, (err, response) => {
-
-        client.end();
-        if (err) {
-          next(err)
-        } else {
-          res.render('confirm', {});
+router.post('/submit',
+  [
+    body('organisation-name')
+        .exists()
+        .not().isEmpty().withMessage('Enter the name of your organisation'),
+     body('primary-contact')
+        .exists()
+        .not().isEmpty().withMessage('Enter the name of the primary contact'),
+    body('primary-contact-role')
+        .exists()
+        .not().isEmpty().withMessage('Enter the primary contact\'s role'),
+    body('phone')
+        .exists()
+        .not().isEmpty().withMessage('Enter your telephone number'),
+    body('email')
+        .exists()
+        .not().isEmpty().withMessage('Please enter your email address') 
+  ],
+    async (request, response) => {
+      try {
+        //console.log(request.body,validationResult(request))
+        const errors = formatValidationErrors(validationResult(request))
+        console.log('found errors in validation')
+        if (!errors) {
+          console.log('no errors in validation');
+          try {
+            await save_to_companies_db(request.body,request);
+            return response.render('confirm')
+          }
+          catch (err){
+            console.log('Failed to save to database',err.toString());
+            response.render('error', { content : {error: {message: "Internal server error"}}});
+          }
         }
-      });
- 
+       
+        let errorSummary = Object.values(errors);
+         
+        response.render('index', {
+          errors,
+          errorSummary,
+          values: request.body // In production this should sanitized.
+        });
+      } catch (err) {
+        throw err.toString();
+      }
     }
-    catch (err) {
-      throw new err('Failed to submit query to database')
-    }
+)
 
-  }
-  catch{
-    throw new err('Failed to connect to database')
-  }
-
-});
 
 module.exports = router;
