@@ -1,85 +1,133 @@
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
+
+{% set groupClass = "govuk--form-group" %}
+{% if errors["is-clinical"] %}
+{% set groupClass = groupClass + " govuk--form-group--error" %}
+{% endif %}
+
+
 <div class="govuk-form-group">
   <fieldset class="govuk-fieldset" aria-describedby="is-clinical-hint">
-    <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
-      <h1 class="govuk-heading-l">
-        Supply chain experience
-      </h1>
-    </legend>
 
-    <span id="is-clinical-hint" class="govuk-hint">
-      2. Do you already produce regulated ventilators that are used in a UK clinical setting
-      <i>i.e. Medicines and Healthcare Products Regulatory Agency (MHRA), approved with a CE mark?</i>
-    </span>
-    <div class="govuk-radios govuk-radios--inline">
-      <div class="govuk-radios__item">
-        <input class="govuk-radios__input" id="is-clinical" name="is-clinical" type="radio" value="yes" required>
-        <label class="govuk-label govuk-radios__label" for="is-clinical">
-          Yes
-        </label>
-      </div>
-      <div class="govuk-radios__item">
-        <input class="govuk-radios__input" id="is-clinical-2" name="is-clinical" type="radio" value="no" required>
-        <label class="govuk-label govuk-radios__label" for="is-clinical-2">
-          No
-        </label>
-      </div>
-    </div>
+    
+    {% call govukFieldset({
+      legend: {
+        text: "Supply chain experience",
+        classes: "govuk-fieldset__legend--l",
+        isPageHeading: true
+      }
+    }) %}
+
+{{ govukRadios({
+  classes: "govuk-radios--inline",
+  idPrefix: "is-clinical",
+  name: "is-clinical",
+  fieldset: {
+    legend: {
+      text: " 2. Do you already produce regulated ventilators that are used in a UK clinical setting
+      i.e. Medicines and Healthcare Products Regulatory Agency (MHRA), approved with a CE mark?",
+      isPageHeading: false,
+      classes: "govuk-body-l"
+    }
+  },
+  errorMessage: {
+    text: errors["is-clinical"].text
+  },
+  items: [
+    {
+      value: "yes",
+      text: "Yes"
+    },
+    {
+      value: "no",
+      text: "No"
+    }
+  ]
+}) }}
+<p class="govuk-body">3. Have you made parts or systems for ventilators:</p>
+{{ govukRadios({
+  classes: "govuk-radios--inline",
+  idPrefix: "human-use",
+  name: "human-use",
+  fieldset: {
+    legend: {
+      text: "for human use in clinical setting?",
+      isPageHeading: false,
+      classes: "govuk-hint"
+    }
+  },
+  errorMessage: {
+    text: errors["human-use"].text
+  },
+  items: [
+    {
+      value: "yes",
+      text: "Yes"
+    },
+    {
+      value: "no",
+      text: "No"
+    }
+  ]
+}) }}
+
+{{ govukRadios({
+  classes: "govuk-radios--inline",
+  idPrefix: "vet-use",
+  name: "vet-use",
+  fieldset: {
+    legend: {
+      text: "for use in veterinary setting?",
+      isPageHeading: false,
+      classes: "govuk-hint"
+    }
+  },
+  errorMessage: {
+    text: errors["vet-use"].text
+  },
+  items: [
+    {
+      value: "yes",
+      text: "Yes"
+    },
+    {
+      value: "no",
+      text: "No"
+    }
+  ]
+}) }}
+{{ govukRadios({
+  classes: "govuk-radios--inline",
+  idPrefix: "other-use",
+  name: "other-use",
+  fieldset: {
+    legend: {
+      text: "use in any other setting?",
+      isPageHeading: false,
+      classes: "govuk-hint"
+    }
+  },
+  errorMessage: {
+    text: errors["other-use"].text
+  },
+  items: [
+    {
+      value: "yes",
+      text: "Yes"
+    },
+    {
+      value: "no",
+      text: "No"
+    }
+  ]
+}) }}
+{% endcall %}
 
 
-    <span id="" class="govuk-hint">
-      3. Have you made parts or systems for ventilators:
-    </span>
-    <span id="human-use-hint" class="govuk-hint">
-      for human use in clinical setting?
-    </span>
-    <div class="govuk-radios govuk-radios--inline">
-      <div class="govuk-radios__item">
-        <input class="govuk-radios__input" id="human-use" name="human-use" type="radio" value="yes" required>
-        <label class="govuk-label govuk-radios__label" for="human-use">
-          Yes
-        </label>
-      </div>
-      <div class="govuk-radios__item">
-        <input class="govuk-radios__input" id="human-use-2" name="human-use" type="radio" value="no" required>
-        <label class="govuk-label govuk-radios__label" for="human-use-2">
-          No
-        </label>
-      </div>
-    </div>
-    <span id="vet-use-hint" class="govuk-hint">
-      for use in veterinary setting?
-    </span>
-    <div class="govuk-radios govuk-radios--inline">
-      <div class="govuk-radios__item">
-        <input class="govuk-radios__input" id="vet-use" name="vet-use" type="radio" value="yes" required>
-        <label class="govuk-label govuk-radios__label" for="vet-use">
-          Yes
-        </label>
-      </div>
-      <div class="govuk-radios__item">
-        <input class="govuk-radios__input" id="vet-use-2" name="vet-use" type="radio" value="no" required>
-        <label class="govuk-label govuk-radios__label" for="vet-use-2">
-          No
-        </label>
-      </div>
-    </div>
-    <span id="other-use-hint" class="govuk-hint">
-      use in any other setting?
-    </span>
-    <div class="govuk-radios govuk-radios--inline">
-      <div class="govuk-radios__item">
-        <input class="govuk-radios__input" id="other-use" name="other-use" type="radio" value="yes" required>
-        <label class="govuk-label govuk-radios__label" for="other-use">
-          Yes
-        </label>
-      </div>
-      <div class="govuk-radios__item">
-        <input class="govuk-radios__input" id="other-use-2" name="other-use" type="radio" value="no" required>
-        <label class="govuk-label govuk-radios__label" for="other-use-2">
-          No
-        </label>
-      </div>
-    </div>
+<br/>
+
+
 
     <div class="govuk-form-group">
       <label class="govuk-label" for="ventilator-detail">

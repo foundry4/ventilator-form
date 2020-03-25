@@ -115,7 +115,19 @@ router.post('/submit',
         .not().isEmpty().withMessage('Enter your telephone number'),
     body('email')
         .exists()
-        .not().isEmpty().withMessage('Please enter your email address') 
+        .not().isEmpty().withMessage('Please enter your email address'),
+    body('is-clinical')
+        .exists()
+        .not().isEmpty().withMessage('Please state if you produce regulated ventilators'),
+    body('human-use')
+        .exists()
+        .not().isEmpty().withMessage('Please state if you have made parts for human use'),
+    body('vet-use')
+        .exists()
+        .not().isEmpty().withMessage('Please state if you have made parts for veterinary use'),
+    body('other-use')
+        .exists()
+        .not().isEmpty().withMessage('Please state if you have made parts for other uses')
   ],
     async (request, response) => {
       try {
