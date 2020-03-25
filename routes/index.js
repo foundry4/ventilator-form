@@ -102,14 +102,14 @@ router.post('/submit', function (req, res, next) {
   try {
     var data = req.body;
     const { fields, positions, json, values } = createData(data);
-    //{ fields, positions, values, json, sql_values };
+
     var sql = 'INSERT INTO companies(' + fields + ') VALUES (' + positions + ');'
     const query = {
       text: sql,
       values: values
     }
     console.log(query);
-    console.log('ssl?' + (process.env.NODE_ENV === 'production'));
+
     try {
       const client = new Client({
         connectionString: process.env.HEROKU_POSTGRESQL_RED_URL || process.env.DATABASE_URL,
