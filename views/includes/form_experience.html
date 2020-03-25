@@ -109,21 +109,22 @@
       <tbody class="govuk-table__body">
         {% for item in devices %}
         <tr class="govuk-table__row">
-          <th scope="row" class="govuk-table__header">{{ item }}</th>
+          <th scope="row" class="govuk-table__header">{{ item.text }}</th>
 
           <td class="govuk-table__cell">
             <div class="govuk-checkboxes__item">
               <input class="govuk-checkboxes__input" id="design-{{ loop.index }}" name="design" type="checkbox"
-                value="{{ item }}" aria-label="design-{{ loop.index }}">
+                value="{{ item.name }}" aria-label="design-{{ loop.index }}">
               <label class="govuk-label govuk-checkboxes__label" for="design-{{ loop.index }}">
                 &nbsp;
               </label>
+              
             </div>
           </td>
           <td class="govuk-table__cell">
             <div class="govuk-checkboxes__item">
               <input class="govuk-checkboxes__input" id="manufacture-{{ loop.index }}" name="manufacture"
-                type="checkbox" value="{{ item }}" aria-label="manufacture-{{ loop.index }}">
+                type="checkbox" value="{{ item.name }}" aria-label="manufacture-{{ loop.index }}">
               <label class="govuk-label govuk-checkboxes__label" for="manufacture-{{ loop.index }}">
                 &nbsp;
               </label>
@@ -132,7 +133,7 @@
           <td class="govuk-table__cell">
             <div class="govuk-checkboxes__item">
               <input class="govuk-checkboxes__input" id="supply-{{ loop.index }}" name="supply" type="checkbox"
-                value="{{ item }}" aria-label="supply-{{ loop.index }}">
+                value="{{ item.name }}" aria-label="supply-{{ loop.index }}">
               <label class="govuk-label govuk-checkboxes__label" for="supply-{{ loop.index }}">
                 &nbsp;
               </label>
