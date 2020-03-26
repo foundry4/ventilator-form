@@ -1,5 +1,7 @@
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
 {% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
 
 {% set groupClass = "govuk--form-group" %}
 {% if errors["is-clinical"] %}
@@ -162,40 +164,77 @@
           <th scope="row" class="govuk-table__header">{{ item.text }}</th>
 
           <td class="govuk-table__cell">
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="design-{{ loop.index }}" name="design" type="checkbox"
-                value="{{ item.name }}" aria-label="design-{{ loop.index }}">
-              <label class="govuk-label govuk-checkboxes__label" for="design-{{ loop.index }}">
-                &nbsp;
-              </label>
-              
-            </div>
+            {{ govukCheckboxes({
+            idPrefix: 'design-'+loop.index,
+            name: "design",
+            items: [
+            {
+            value: item.name,
+            html: ' ',
+            checked: values["design"]|length and item.name in values["design"]
+            }
+            ],
+            errorMessage: errors["design"]
+            }) }}
+           </td>
+          <td class="govuk-table__cell">
+            {{ govukCheckboxes({
+            idPrefix: 'manufacture-'+loop.index,
+            name: "manufacture",
+            items: [
+            {
+            value: item.name,
+            html: ' ',
+            checked: values["manufacture"]|length and item.name in values["manufacture"]
+            }
+            ],
+            errorMessage: errors["manufacture"]
+            }) }}
           </td>
           <td class="govuk-table__cell">
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="manufacture-{{ loop.index }}" name="manufacture"
-                type="checkbox" value="{{ item.name }}" aria-label="manufacture-{{ loop.index }}">
-              <label class="govuk-label govuk-checkboxes__label" for="manufacture-{{ loop.index }}">
-                &nbsp;
-              </label>
-            </div>
-          </td>
+            {{ govukCheckboxes({
+            idPrefix: 'supply-'+loop.index,
+            name: "supply",
+            items: [
+            {
+            value: item.name,
+            html: ' ',
+            checked: values["supply"]|length and item.name in values["supply"]
+            }
+            ],
+            errorMessage: errors["supply"]
+            }) }}
+           </td>
           <td class="govuk-table__cell">
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="supply-{{ loop.index }}" name="supply" type="checkbox"
-                value="{{ item.name }}" aria-label="supply-{{ loop.index }}">
-              <label class="govuk-label govuk-checkboxes__label" for="supply-{{ loop.index }}">
-                &nbsp;
-              </label>
-            </div>
-          </td>
-          <td class="govuk-table__cell">
-            <select class="govuk-select" name="location-{{ loop.index }}" aria-label="location-{{ loop.index }}">
-              <option value="" selected></option>
-              <option value="1">in the UK</option>
-              <option value="2">in Europe</option>
-              <option value="3">in rest of world</option>
-            </select>
+            {{ govukSelect({
+            "id": "location-"+loop.index,
+            "name": "location-"+loop.index,
+            "label": {
+            "html": ""
+            },
+            "items": [
+            {
+            "value": "",
+            "text": "",
+            "selected": true
+            },
+            {
+            "value": 1,
+            "text": "in the UK",
+            "selected": values["location-"+loop.index]==='1'
+            },
+            {
+            "value": 2,
+            "text": "in Europe",
+            "selected": values["location-"+loop.index]==='2'
+            },
+            {
+            "value": 3,
+            "text": "in rest of world",
+            "selected": values["location-"+loop.index]==='3'
+            }
+            ]
+            }) }}
           </td>
 
         </tr>
