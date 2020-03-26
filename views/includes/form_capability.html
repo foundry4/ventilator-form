@@ -53,7 +53,7 @@
                 {
                 value: item.name,
                 html: ' ',
-                checked: values["skills"]|length and item.text in values["skills"]
+                checked: values["skills"]|length and item.name in values["skills"]
                 }
                 ],
                 errorMessage: errors["skills"]
@@ -67,7 +67,7 @@
                 {
                 value: item.name,
                 html: ' ',
-                checked: values["specialism"]|length and item.text in values["specialism"]
+                checked: values["specialism"]|length and item.name in values["specialism"]
                 }
                 ],
                 errorMessage: errors["specialism"]
