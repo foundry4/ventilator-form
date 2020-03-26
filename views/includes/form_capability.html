@@ -13,17 +13,17 @@
 
     <span id="capabilites-hint" class="govuk-hint">
     </span>
-
-    <div class="govuk-form-group">
-      <label class="govuk-label" for="offer">
-        5. Please indicate what your organisation can offer, including the relevant experience and background
-        information, to help inform the organisation's suitability for the initiative. (optional)
-      </label>
-      <span id="offer-hint" class="govuk-hint">
-      </span>
-      <textarea class="govuk-textarea" id="offer" name="offer" rows="5"
-        aria-describedby="offer-hint"></textarea>
-    </div>
+    {{ govukTextarea({
+      label: {
+        text: "5. Please indicate what your organisation can offer, including the relevant experience and background
+    information, to help inform the organisation's suitability for the initiative. (optional)"
+      },
+      rows: 5,
+      id: "offer",
+      name: "offer",
+      value: values["offer"],
+      errorMessage: errors["offer"]
+    }) }}
 
     <div class="govuk-form-group">
       <fieldset class="govuk-fieldset" aria-describedby="expertise-hint">
