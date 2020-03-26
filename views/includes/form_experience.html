@@ -1,5 +1,6 @@
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
 {% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 
 {% set groupClass = "govuk--form-group" %}
 {% if errors["is-clinical"] %}
@@ -131,15 +132,16 @@
 
 
 
-    <div class="govuk-form-group">
-      <label class="govuk-label" for="ventilator-detail">
-        If you answered yes to any of the above, please provide further details.
-      </label>
-      <span id="ventilator-detail-hint" class="govuk-hint">
-      </span>
-      <textarea class="govuk-textarea" id="ventilator-detail" name="ventilator-detail" rows="5"
-        aria-describedby="ventilator-detail-hint"></textarea>
-    </div>
+    {{ govukTextarea({
+      label: {
+        text: "If you answered yes to any of the above, please provide further details."
+      },
+      rows: 5,
+      id: "ventilator-detail",
+      name: "ventilator-detail",
+      value: values["ventilator-detail"],
+      errorMessage: errors["ventilator-detail"]
+    }) }}
 
     <span id="devices-hint" class="govuk-hint">
       4. Please indicate whether you design, manufacture or supply any of the following medical devices or component
