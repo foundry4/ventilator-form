@@ -149,9 +149,12 @@ router.post('/submit',
         let errorSummary = Object.values(errors);
          
         response.render('index', {
+          devices: devices,
+          expertise: expertise,
+          resources: resources,
           errors,
           errorSummary,
-          values: request.body // In production this should sanitized.
+          values: request.body, // In production this should sanitized.
         });
       } catch (err) {
         throw err.toString();
