@@ -1,6 +1,8 @@
 {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
 {% from "govuk/components/select/macro.njk" import govukSelect %}
-
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/character-count/macro.njk" import govukCharacterCount %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 <div class="govuk-form-group">
   <fieldset class="govuk-fieldset" aria-describedby="capabilites-hint">
     <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
@@ -11,17 +13,17 @@
 
     <span id="capabilites-hint" class="govuk-hint">
     </span>
-
-    <div class="govuk-form-group">
-      <label class="govuk-label" for="offer">
-        5. Please indicate what your organisation can offer, including the relevant experience and background
-        information, to help inform the organisation's suitability for the initiative. (optional)
-      </label>
-      <span id="offer-hint" class="govuk-hint">
-      </span>
-      <textarea class="govuk-textarea" id="offer" name="offer" rows="5"
-        aria-describedby="offer-hint"></textarea>
-    </div>
+    {{ govukTextarea({
+      label: {
+        text: "5. Please indicate what your organisation can offer, including the relevant experience and background
+    information, to help inform the organisation's suitability for the initiative. (optional)"
+      },
+      rows: 5,
+      id: "offer",
+      name: "offer",
+      value: values["offer"],
+      errorMessage: errors["offer"]
+    }) }}
 
     <div class="govuk-form-group">
       <fieldset class="govuk-fieldset" aria-describedby="expertise-hint">
@@ -47,61 +49,61 @@
 
               <td class="govuk-table__cell">
                 {{ govukCheckboxes({
-                idPrefix: 'skills-'+loop.index,
-                name: "skills",
-                items: [
-                {
-                value: item.name,
-                html: ' ',
-                checked: values["skills"]|length and item.name in values["skills"]
-                }
-                ],
-                errorMessage: errors["skills"]
+                  idPrefix: 'skills-'+loop.index,
+                  name: "skills",
+                  items: [
+                    {
+                      value: item.name,
+                      html: ' ',
+                      checked: values["skills"]|length and item.name in values["skills"]
+                    }
+                  ],
+                  errorMessage: errors["skills"]
                 }) }}
               </td>
               <td class="govuk-table__cell">
                 {{ govukCheckboxes({
-                idPrefix: 'specialism-'+loop.index,
-                name: "specialism",
-                items: [
-                {
-                value: item.name,
-                html: ' ',
-                checked: values["specialism"]|length and item.name in values["specialism"]
-                }
-                ],
-                errorMessage: errors["specialism"]
+                  idPrefix: 'specialism-'+loop.index,
+                  name: "specialism",
+                  items: [
+                    {
+                      value: item.name,
+                      html: ' ',
+                      checked: values["specialism"]|length and item.name in values["specialism"]
+                    }
+                  ],
+                  errorMessage: errors["specialism"]
                 }) }}
               </td>
               <td class="govuk-table__cell">
                 {{ govukSelect({
-                "id": "specialism-location-"+loop.index,
-                "name": "specialism-location-"+loop.index,
-                "label": {
-                "html": ""
-                },
-                "items": [
-                {
-                "value": "",
-                "text": "",
-                "selected": true
-                },
-                {
-                "value": 1,
-                "text": "in the UK",
-                "selected": values["specialism-location-"+loop.index]==='1'
-                },
-                {
-                "value": 2,
-                "text": "in Europe",
-                "selected": values["specialism-location-"+loop.index]==='2'
-                },
-                {
-                "value": 3,
-                "text": "in rest of world",
-                "selected": values["specialism-location-"+loop.index]==='3'
-                }
-                ]
+                  "id": "specialism-location-"+loop.index,
+                  "name": "specialism-location-"+loop.index,
+                  "label": {
+                    "html": ""
+                  },
+                  "items": [
+                    {
+                      "value": "",
+                      "text": "",
+                      "selected": true
+                    },
+                    {
+                      "value": 1,
+                      "text": "in the UK",
+                      "selected": values["specialism-location-"+loop.index]==='1'
+                    },
+                    {
+                      "value": 2,
+                      "text": "in Europe",
+                      "selected": values["specialism-location-"+loop.index]==='2'
+                    },
+                    {
+                      "value": 3,
+                      "text": "in rest of world",
+                      "selected": values["specialism-location-"+loop.index]==='3'
+                    }
+                  ]
                 }) }}
               </td>
 
@@ -121,25 +123,34 @@
         </span>
         <div class="govuk-checkboxes">
           {% for item in resources %}
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="resources-{{ loop.index }}" name="resources" type="checkbox"
-              value="{{ item }}" aria-label="resources-{{ loop.index }}">
-            <label class="govuk-label govuk-checkboxes__label" for="resources-{{ loop.index }}">
-              {{ item }}
-            </label>
-          </div>
+            {{ govukCheckboxes({
+            idPrefix: 'resources-'+loop.index,
+            name: "resources",
+            items: [
+              {
+                value: item.name,
+                html: item.text,
+                checked: values["resources"]|length and item.name in values["resources"]
+              }
+            ],
+            errorMessage: errors["resources"]
+            }) }}
           {% endfor %}
         </div>
         <br />
-        <div class="govuk-form-group">
-          <label class="govuk-label" for="resources-detail">
-            If yes to any of the above, please describe:
-          </label>
-          <span id="resources-detail-hint" class="govuk-hint">
-          </span>
-          <textarea class="govuk-textarea" id="resources-detail" name="resources-detail" rows="5"
-            aria-describedby="resources-detail-hint"></textarea>
-        </div>
+
+        {{ govukTextarea({
+          label: {
+            text: "If yes to any of the above, please describe:"
+          },
+          rows: 5,
+          classes: orgNameClass,
+          id: "resources-detail",
+          name: "resources-detail",
+          value: values["resources-detail"],
+          errorMessage: errors["resources-detail"]
+        }) }}
+
       </fieldset>
     </div>
   </fieldset>
