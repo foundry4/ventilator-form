@@ -167,6 +167,8 @@ router.post('/',
     }
 );
 
-
+router.get('/redirect', function (req, res, next) {
+    res.render('redirect', {});
+});
 
 module.exports = router;
