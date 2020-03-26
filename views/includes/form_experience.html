@@ -3,12 +3,6 @@
 {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
 {% from "govuk/components/select/macro.njk" import govukSelect %}
 
-{% set groupClass = "govuk--form-group" %}
-{% if errors["is-clinical"] %}
-{% set groupClass = groupClass + " govuk--form-group--error" %}
-{% endif %}
-
-
 <div class="govuk-form-group">
   <fieldset class="govuk-fieldset" aria-describedby="is-clinical-hint">
 
