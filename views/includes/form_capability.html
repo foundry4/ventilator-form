@@ -43,7 +43,7 @@
           <tbody class="govuk-table__body">
             {% for item in expertise %}
             <tr class="govuk-table__row">
-              <th scope="row" class="govuk-table__header">"{{ item.text }}"</th>
+              <th scope="row" class="govuk-table__header">{{ item.text }}</th>
 
               <td class="govuk-table__cell">
                 {{ govukCheckboxes({
@@ -51,7 +51,7 @@
                 name: "skills",
                 items: [
                 {
-                value: item.text,
+                value: item.name,
                 html: ' ',
                 checked: values["skills"]|length and item.text in values["skills"]
                 }
@@ -65,7 +65,7 @@
                 name: "specialism",
                 items: [
                 {
-                value: item.text,
+                value: item.name,
                 html: ' ',
                 checked: values["specialism"]|length and item.text in values["specialism"]
                 }
