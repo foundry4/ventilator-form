@@ -1,3 +1,6 @@
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
+
 <div class="govuk-form-group">
   <fieldset class="govuk-fieldset" aria-describedby="capabilites-hint">
     <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
@@ -40,34 +43,66 @@
           <tbody class="govuk-table__body">
             {% for item in expertise %}
             <tr class="govuk-table__row">
-              <th scope="row" class="govuk-table__header">{{ item.text }}</th>
+              <th scope="row" class="govuk-table__header">"{{ item.text }}"</th>
 
               <td class="govuk-table__cell">
-                <div class="govuk-checkboxes__item">
-                  <input class="govuk-checkboxes__input" id="skills-{{ loop.index }}" name="skills" type="checkbox"
-                    value="{{ item.name }}" aria-label="skills-{{ loop.index }}">
-                  <label class="govuk-label govuk-checkboxes__label" for="skills-{{ loop.index }}">
-                    &nbsp;
-                  </label>
-                </div>
-              </td>
-
-              <td class="govuk-table__cell">
-                <div class="govuk-checkboxes__item">
-                  <input class="govuk-checkboxes__input" id="specialism-{{ loop.index }}" name="specialism"
-                    type="checkbox" value="{{ item.name }}" aria-label="specialism-{{ loop.index }}">
-                  <label class="govuk-label govuk-checkboxes__label" for="specialism-{{ loop.index }}">
-                    &nbsp;
-                  </label>
-                </div>
+                {{ govukCheckboxes({
+                idPrefix: 'skills-'+loop.index,
+                name: "skills",
+                items: [
+                {
+                value: item.text,
+                html: ' ',
+                checked: values["skills"]|length and item.text in values["skills"]
+                }
+                ],
+                errorMessage: errors["skills"]
+                }) }}
               </td>
               <td class="govuk-table__cell">
-                <select class="govuk-select" name="specialism-location-{{ loop.index }}" aria-label="specialism-location-{{ loop.index }}">
-                  <option value="" selected></option>
-                  <option value="1">in the UK</option>
-                  <option value="2">in Europe</option>
-                  <option value="3">in rest of world</option>
-                </select>
+                {{ govukCheckboxes({
+                idPrefix: 'specialism-'+loop.index,
+                name: "specialism",
+                items: [
+                {
+                value: item.text,
+                html: ' ',
+                checked: values["specialism"]|length and item.text in values["specialism"]
+                }
+                ],
+                errorMessage: errors["specialism"]
+                }) }}
+              </td>
+              <td class="govuk-table__cell">
+                {{ govukSelect({
+                "id": "specialism-location-"+loop.index,
+                "name": "specialism-location-"+loop.index,
+                "label": {
+                "html": ""
+                },
+                "items": [
+                {
+                "value": "",
+                "text": "",
+                "selected": true
+                },
+                {
+                "value": 1,
+                "text": "in the UK",
+                "selected": values["specialism-location-"+loop.index]==='1'
+                },
+                {
+                "value": 2,
+                "text": "in Europe",
+                "selected": values["specialism-location-"+loop.index]==='2'
+                },
+                {
+                "value": 3,
+                "text": "in rest of world",
+                "selected": values["specialism-location-"+loop.index]==='3'
+                }
+                ]
+                }) }}
               </td>
 
             </tr>
@@ -107,13 +142,5 @@
         </div>
       </fieldset>
     </div>
-
-
-
-
-
-
-
-
   </fieldset>
 </div>

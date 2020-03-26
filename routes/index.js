@@ -147,15 +147,19 @@ router.post('/submit',
         }
        
         let errorSummary = Object.values(errors);
-         
-        response.render('index', {
-          devices: devices,
-          expertise: expertise,
-          resources: resources,
-          errors,
-          errorSummary,
-          values: request.body, // In production this should sanitized.
-        });
+        try {
+            response.render('index', {
+                devices: devices,
+                expertise: expertise,
+                resources: resources,
+                errors,
+                errorSummary,
+                values: request.body, // In production this should sanitized.
+            });
+        }
+        catch(err){
+            console.log('failed to render page',err.toString())
+        }
       } catch (err) {
         throw err.toString();
       }
