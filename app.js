@@ -9,8 +9,7 @@ const nunjucks = require('nunjucks');
 
 const env = (process.env.NODE_ENV || 'development').toLowerCase();
 
-if (process.env.NODE_ENV !== 'production') {
-}
+console.log(process.env.NODE_ENV );
 
 var indexRouter = require('./routes/index');
 //var usersRouter = require('./routes/users');
