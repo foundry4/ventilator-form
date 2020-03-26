@@ -3,21 +3,26 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const connectLivereload = require("connect-livereload");
-const livereload = require('livereload');
+var connectLivereload;
+var livereload;
 const nunjucks = require('nunjucks');
 
 const env = (process.env.NODE_ENV || 'development').toLowerCase();
 
 if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
 }
 
 var indexRouter = require('./routes/index');
 //var usersRouter = require('./routes/users');
 
 var app = express();
-app.use(connectLivereload());
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+
+  connectLivereload = require("connect-livereload");
+  livereload = require('livereload');
+  app.use(connectLivereload());
+}
 
 // view engine setup
 let appViews = [
@@ -58,15 +63,17 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// live reload of browser, listening high up in the ports
-var liveReloadServer = livereload.createServer();
-liveReloadServer.watch(path.join(__dirname, 'public'));
+if (process.env.NODE_ENV !== 'production') {
+  // live reload of browser, listening high up in the ports
+  var liveReloadServer = livereload.createServer();
+  liveReloadServer.watch(path.join(__dirname, 'public'));
 
-// wait for high port to re-establish...
-liveReloadServer.server.once("connection", () => {
-  setTimeout(() => {
-    liveReloadServer.refresh("/");
-  }, 100);
-});
+  // wait for high port to re-establish...
+  liveReloadServer.server.once("connection", () => {
+    setTimeout(() => {
+      liveReloadServer.refresh("/");
+    }, 100);
+  });
+}
 
 module.exports = app;
