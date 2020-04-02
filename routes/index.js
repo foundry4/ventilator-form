@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { body, validationResult } = require('express-validator')
 const { formatValidationErrors } = require('../lib/utils');
-const save_to_db = require('../lib/save_to_db');
+//const save_to_db = require('../lib/save_to_db');
 const save_to_companies_db = require('../lib/save_to_companies_db');
 var {devices, expertise, resources} = require('../lib/constants');
 
